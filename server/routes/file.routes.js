@@ -22,6 +22,7 @@ router.route('/files').get(FileController.getFiles);
 
 // Get one file by cuid
 router.route('/files/:cuid').get(FileController.getFile);
+router.route('/download/:cuid').get(FileController.downloadFile);
 
 // Delete a File by cuid
 router.route('/files/:cuid').delete(FileController.deleteFile);

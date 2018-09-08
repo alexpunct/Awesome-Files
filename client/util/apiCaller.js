@@ -5,22 +5,41 @@ export const API_URL = (typeof window === 'undefined' || process.env.NODE_ENV ==
   process.env.BASE_URL || (`http://localhost:${process.env.PORT || Config.port}/api`) :
   '/api';
 
+export function callApiBlob(endpoint, method = 'get', body) {
+  return fetch(`${API_URL}/${endpoint}`, {
+    headers: { responseType: 'blob', timeout: 30000 },
+    method,
+    body: JSON.stringify(body),
+  })
+    .then(response => response.blob().then(blob => ({ blob, response })))
+    .then(({ blob, response }) => {
+      if (!response.ok) {
+        return Promise.reject(blob);
+      }
+      return blob;
+    })
+    .then(
+      response => response,
+      error => error
+    );
+}
+
 export default function callApi(endpoint, method = 'get', body) {
   return fetch(`${API_URL}/${endpoint}`, {
     headers: { 'content-type': 'application/json' },
     method,
     body: JSON.stringify(body),
   })
-  .then(response => response.json().then(json => ({ json, response })))
-  .then(({ json, response }) => {
-    if (!response.ok) {
-      return Promise.reject(json);
-    }
+    .then(response => response.json().then(json => ({ json, response })))
+    .then(({ json, response }) => {
+      if (!response.ok) {
+        return Promise.reject(json);
+      }
 
-    return json;
-  })
-  .then(
-    response => response,
-    error => error
-  );
+      return json;
+    })
+    .then(
+      response => response,
+      error => error
+    );
 }

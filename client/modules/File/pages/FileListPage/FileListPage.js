@@ -7,7 +7,7 @@ import FileList from '../../components/FileList';
 import FileUploadWidget from '../../components/FileUploadWidget/FileUploadWidget';
 
 // Import Actions
-import { fetchFiles, deleteFileRequest } from '../../FileActions';
+import { fetchFiles, deleteFileRequest, downloadFileRequest } from '../../FileActions';
 import { toggleUploadFileForm } from '../../../App/AppActions';
 
 // Import Selectors
@@ -25,6 +25,10 @@ class FileListPage extends Component {
     }
   };
 
+  handleDownloadFile = (cuid, fileName) => {
+    this.props.dispatch(downloadFileRequest(cuid, fileName));
+  }
+
   handleAddFiles = () => {
     this.props.dispatch(toggleUploadFileForm());
     this.props.dispatch(fetchFiles());
@@ -34,7 +38,7 @@ class FileListPage extends Component {
     return (
       <div>
         <FileUploadWidget addFiles={this.handleAddFiles} showAddFile={this.props.showAddFile} />
-        <FileList handleDeleteFile={this.handleDeleteFile} files={this.props.files} />
+        <FileList handleDeleteFile={this.handleDeleteFile} handleDownloadFile={this.handleDownloadFile} files={this.props.files} />
       </div>
     );
   }

@@ -1,4 +1,5 @@
-import callApi from '../../util/apiCaller';
+import FileSaver from 'file-saver';
+import callApi, { callApiBlob } from '../../util/apiCaller';
 
 // Export Constants
 export const ADD_FILE = 'ADD_FILE';
@@ -55,5 +56,11 @@ export function deleteFile(cuid) {
 export function deleteFileRequest(cuid) {
   return (dispatch) => {
     return callApi(`files/${cuid}`, 'delete').then(() => dispatch(deleteFile(cuid)));
+  };
+}
+
+export function downloadFileRequest(cuid, fileName) {
+  return () => {
+    return callApiBlob(`download/${cuid}`).then((fileBlob) => { FileSaver.saveAs(fileBlob, fileName); });
   };
 }

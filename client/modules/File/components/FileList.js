@@ -15,6 +15,7 @@ function FileList(props) {
           <FileListItem
             file={file}
             key={file.cuid}
+            onClick={() => props.handleDownloadFile(file.cuid, file.filename)}
             onDelete={() => props.handleDeleteFile(file.cuid)}
           />
         ))
@@ -33,6 +34,7 @@ FileList.propTypes = {
     cuid: PropTypes.string.isRequired,
   })).isRequired,
   handleDeleteFile: PropTypes.func.isRequired,
+  handleDownloadFile: PropTypes.func.isRequired,
 };
 
 export default FileList;

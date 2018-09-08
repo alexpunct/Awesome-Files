@@ -81,3 +81,26 @@ export function deleteFile(req, res) {
     });
   });
 }
+
+/**
+ * Download a single file
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function downloadFile(req, res) {
+  File.findOne({ cuid: req.params.cuid }).exec((err, file) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    if (!file.path) {
+      res.status(404).send();
+    }
+    fs.readFile(file.path, (error, data) => {
+      if (err) {
+        res.status(404).send(error);
+      }
+      res.send(data);
+    });
+  });
+}
