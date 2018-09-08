@@ -25,7 +25,7 @@ export function Header(props, context) {
         </h1>
         {
           context.router.isActive('/', true)
-            ? <a className={styles['upload-file-button']} href="#" onClick={props.toggleAddPost}><FormattedMessage id="uploadFile" /></a>
+            ? <a className={styles['upload-file-button']} href="#" onClick={props.toggleUploadFile}><FormattedMessage id="uploadFile" /></a>
             : null
         }
       </div>
@@ -38,7 +38,7 @@ Header.contextTypes = {
 };
 
 Header.propTypes = {
-  toggleAddPost: PropTypes.func.isRequired,
+  toggleUploadFile: PropTypes.func.isRequired,
   switchLanguage: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
 };

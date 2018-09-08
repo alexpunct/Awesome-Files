@@ -7,7 +7,7 @@ import { App } from '../App';
 import styles from '../App.css';
 import { intlShape } from 'react-intl';
 import { intl } from '../../../util/react-intl-test-helper';
-import { toggleAddPost } from '../AppActions';
+import { toggleUploadFileForm } from '../AppActions';
 
 const intlProp = { ...intl, enabledLanguages: ['en', 'fr'] };
 const children = <h1>Test</h1>;
@@ -67,5 +67,5 @@ test('calling toggleAddPostSection dispatches toggleAddPost', t => {
 
   wrapper.instance().toggleAddPostSection();
   t.truthy(dispatch.calledOnce);
-  t.truthy(dispatch.calledWith(toggleAddPost()));
+  t.truthy(dispatch.calledWith(toggleUploadFileForm()));
 });

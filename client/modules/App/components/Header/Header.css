@@ -8,7 +8,7 @@
   width: 100%;
   max-width: 980px;
   margin: auto;
-  padding: 64px 16px;
+  padding: 34px 16px;
   overflow: auto;
 }
 
@@ -36,6 +36,10 @@
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+}
+
+.upload-file-button {
+  margin-top: 10px;
 }
 
 .add-post-button:hover,

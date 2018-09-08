@@ -11,7 +11,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
-import { toggleAddPost } from './AppActions';
+import { toggleUploadFileForm } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
 let DevTools;
@@ -30,8 +30,8 @@ export class App extends Component {
     this.setState({ isMounted: true }); // eslint-disable-line
   }
 
-  toggleAddPostSection = () => {
-    this.props.dispatch(toggleAddPost());
+  toggleUploadFileForm = () => {
+    this.props.dispatch(toggleUploadFileForm());
   };
 
   render() {
@@ -40,8 +40,8 @@ export class App extends Component {
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>
           <Helmet
-            title="MERN Starter - Blog App"
-            titleTemplate="%s - Blog App"
+            title="Awesome Files"
+            titleTemplate="%s - manage files easily"
             meta={[
               { charset: 'utf-8' },
               {
@@ -57,7 +57,7 @@ export class App extends Component {
           <Header
             switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
             intl={this.props.intl}
-            toggleAddPost={this.toggleAddPostSection}
+            toggleUploadFile={this.toggleUploadFileForm}
           />
           <div className={styles.container}>
             {this.props.children}

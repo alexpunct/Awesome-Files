@@ -1,9 +1,9 @@
 // Export Constants
-export const TOGGLE_ADD_POST = 'TOGGLE_ADD_POST';
+export const TOGGLE_UPLOAD_FILE_FORM = 'TOGGLE_UPLOAD_FILE_FORM';
 
 // Export Actions
-export function toggleAddPost() {
+export function toggleUploadFileForm() {
   return {
-    type: TOGGLE_ADD_POST,
+    type: TOGGLE_UPLOAD_FILE_FORM,
   };
 }

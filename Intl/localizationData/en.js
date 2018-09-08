@@ -2,7 +2,8 @@ export default {
   locale: 'en',
   messages: {
     siteTitle: 'Awesome Files',
-    uploadFile: 'Upload file',
+    uploadFile: 'Upload files',
+    chooseFile: 'Click to Choose Files',
     listFiles: 'List files',
     overwriteFile: 'Overwrite file',
     keepBothFiles: 'Keep both',
