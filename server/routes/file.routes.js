@@ -1,11 +1,16 @@
 import { Router } from 'express';
 import * as FileController from '../controllers/file.controller';
+import fs from 'fs';
 const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: './uploads/',
   filename(req, file, cb) {
-    cb(null, file.originalname);
+    let saveName = file.originalname;
+    if (fs.existsSync(`./uploads/${file.originalname}`)) {
+      saveName = `${Date.now()}_${saveName}`;
+    }
+    cb(null, saveName);
   },
 });
 const upload = multer({ storage });
@@ -18,10 +23,10 @@ router.route('/files').get(FileController.getFiles);
 // Get one file by cuid
 router.route('/files/:cuid').get(FileController.getFile);
 
-// Add a new File
-router.use(upload.single('file')).route('/files').post(FileController.addFile);
-
 // Delete a File by cuid
 router.route('/files/:cuid').delete(FileController.deleteFile);
+
+// Add a new File
+router.use(upload.single('file')).route('/files').post(FileController.addFile);
 
 export default router;

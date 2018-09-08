@@ -1,6 +1,7 @@
 import File from '../models/file';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
+import fs from 'fs';
 
 /**
  * Get all files
@@ -71,7 +72,12 @@ export function deleteFile(req, res) {
     }
 
     file.remove(() => {
-      res.status(200).end();
+      fs.unlink(file.path, error => {
+        if (error) {
+          // do nothing, it means the file doesn't exist
+        }
+        res.status(200).end();
+      });
     });
   });
 }

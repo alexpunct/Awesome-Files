@@ -7,7 +7,7 @@ import FileList from '../../components/FileList';
 import FileUploadWidget from '../../components/FileUploadWidget/FileUploadWidget';
 
 // Import Actions
-import { addFileRequest, fetchFiles, deleteFileRequest } from '../../FileActions';
+import { fetchFiles, deleteFileRequest } from '../../FileActions';
 import { toggleUploadFileForm } from '../../../App/AppActions';
 
 // Import Selectors
@@ -25,25 +25,9 @@ class FileListPage extends Component {
     }
   };
 
-  handleAddFiles = (files) => {
-    // files.forEach(file => {
-    //   // console.log('====================================');
-    //   // console.log(file);
-    //   // console.log('====================================');
-
-    //   // const reader = new FileReader();
-    //   // reader.onload = () => {
-    //   //   const fileAsBinaryString = reader.result;
-    //   //   console.log('filebinary', fileAsBinaryString);
-    //   // };
-    //   // reader.onabort = () => console.log('file reading was aborted');
-    //   // reader.onerror = () => console.log('file reading has failed');
-
-    //   // reader.readAsBinaryString(file);
-    //   this.props.dispatch(addFileRequest(file));
-    // });
-
-    this.props.dispatch(addFileRequest(files[0]));
+  handleAddFiles = () => {
+    this.props.dispatch(toggleUploadFileForm());
+    this.props.dispatch(fetchFiles());
   };
 
   render() {
