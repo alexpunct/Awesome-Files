@@ -1,17 +1,24 @@
-.footer{
+.footer {
   text-align: center;
   padding: 56px 0;
   background-size: cover;
+  background: #272822;
+  background-size: cover;
+  border-top: 1px solid #F92672;
 }
 
-.footer p{
+.footer p {
   margin: 0 0 8px 0;
   font-size: 14px;
   color: #FFF;
 }
 
-.footer a{
+.footer a {
   color: #FFF;
   text-decoration: none;
   font-weight: 700;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }

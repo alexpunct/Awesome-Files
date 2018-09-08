@@ -1,7 +1,20 @@
 export default {
   locale: 'en',
   messages: {
-    siteTitle: 'MERN Starter Blog',
+    siteTitle: 'Awesome Files',
+    uploadFile: 'Upload file',
+    listFiles: 'List files',
+    overwriteFile: 'Overwrite file',
+    keepBothFiles: 'Keep both',
+    deleteFile: 'Delete file',
+    fileName: 'File name',
+    fileSize: 'File size',
+    fileType: 'File type',
+    invalidFile: 'Invalid file',
+    searchFile: 'Search file',
+    byName: 'By name',
+    byType: 'By type',
+
     addPost: 'Add Post',
     switchLanguage: 'Switch Language',
     twitterMessage: 'We are on Twitter',
