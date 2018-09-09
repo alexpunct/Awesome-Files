@@ -61,7 +61,7 @@ export class App extends Component {
             intl={this.props.intl}
             toggleUploadFile={this.toggleUploadFileForm}
           />
-          <NotificationContainer className={styles['notification-container']} />
+          <NotificationContainer />
           <div className={styles.container}>
             {this.props.children}
           </div>

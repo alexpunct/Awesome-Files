@@ -10,18 +10,30 @@ function FileList(props) {
     return <div>No files uploaded yet...</div>;
   }
   return (
-    <div className="listView">
-      {
-        props.files.map(file => (
-          <FileListItem
-            file={file}
-            key={file.cuid}
-            onClick={() => props.handleDownloadFile(file.cuid, file.filename)}
-            onDelete={() => props.handleDeleteFile(file.cuid)}
-          />
-        ))
-      }
-    </div>
+    <table className="listView" style={{ width: '100%' }}>
+      <thead style={{ fontWeight: 'bold', fontSize: 18 }}>
+        <tr>
+          <td>File name</td>
+          <td>Extension</td>
+          <td>Size</td>
+          <td>Date added</td>
+          <td>Actions</td>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          props.files.map(file => (
+            <FileListItem
+              file={file}
+              key={file.cuid}
+              onClick={() => props.handleDownloadFile(file.cuid, file.filename)}
+              onDelete={() => props.handleDeleteFile(file.cuid)}
+            />
+          ))
+        }
+      </tbody>
+
+    </table>
   );
 }
 

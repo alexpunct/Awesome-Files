@@ -9,16 +9,13 @@ import styles from './FileListItem.css';
 
 function FileListItem(props) {
   return (
-    <div className={styles['single-files']}>
-      <h3 className={styles['file-name']}>
-        <a href="#" onClick={props.onClick}>{props.file.filename}</a>
-      </h3>
-      <p className={styles['file-size']}>Date: {moment(props.file.dateAdded).format('lll')}</p>
-      <p className={styles['file-size']}>Size: {filesize(props.file.size)}</p>
-      <p className={styles['file-type']}>Type: {props.file.extension}</p>
-      <p className={styles['files-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deleteFile" /></a></p>
-      <hr className={styles.divider} />
-    </div>
+    <tr className={styles['file-row']}>
+      <td className={styles['file-name']}><a href="#" onClick={props.onClick}>{props.file.filename}</a></td>
+      <td className={styles['file-ext']}>{props.file.extension}</td>
+      <td className={styles['file-size']}>{filesize(props.file.size)}</td>
+      <td className={styles['file-added']}>{moment(props.file.dateAdded).format('lll')}</td>
+      <td className={styles['file-actions']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deleteFile" /></a></td>
+    </tr>
   );
 }
 

@@ -79,5 +79,10 @@ In the `server` folder, the code is following the MERN convention:
 
 Also in the `server.js` file is where tha application is setup and most middlewares are added.
 
+## Known issues
+
+- tests are failing after the changes in the framework
+- styling needed for the notifications and dropzone
+
 ## License
 Awesome Files is released under the [MIT License](http://www.opensource.org/licenses/MIT).
