@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import * as FileController from '../controllers/file.controller';
 import fs from 'fs';
-const multer = require('multer');
+
+import multer from 'multer';
 
 const storage = multer.diskStorage({
   destination: './uploads/',

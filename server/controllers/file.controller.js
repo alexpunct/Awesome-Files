@@ -20,6 +20,7 @@ export function getFilesMeta(req, res) {
       }
       const metaData = {
         allExtensions: _.uniq(files.map(file => file.extension)),
+        csrfToken: req.csrfToken(),
       };
       res.json(metaData);
     });

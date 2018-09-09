@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import DropzoneComponent from 'react-dropzone-component';
+import { getFilesMeta } from '../../FileReducer';
 import { API_URL, AUTH_TOKEN } from '../../../../util/apiCaller';
 import { NotificationManager } from 'react-notifications';
 // Import Style
@@ -19,7 +21,7 @@ export class FileCreateWidget extends Component {
 
     const djsConfig = {
       addRemoveLinks: false,
-      headers: { 'x-auth': AUTH_TOKEN },
+      headers: { 'x-auth': AUTH_TOKEN, 'XSRF-Token': this.props.filesMeta.csrfToken },
       maxFiles: 10, // MB
       maxFilesize: 20, // MB
       parallelUploads: 10,
@@ -31,10 +33,6 @@ export class FileCreateWidget extends Component {
       init: dz => {
         // save the instance against the class so we can reference it later and reset it
         this.dropzone = dz;
-      },
-      sending: (formData, req) => {
-        // @todo add CSRF token to req
-        return req;
       },
       maxfilesexceeded: (file) => {
         NotificationManager.error(`Error uploading ${file.name}`, 'Maximum parallel files exceeded. Please try again...');
@@ -55,6 +53,7 @@ export class FileCreateWidget extends Component {
           <h2 className={styles['form-title']}><FormattedMessage id="uploadFile" /></h2>
           <div className={styles['form-subtitle']}>Maximum size per file: {djsConfig.maxFilesize}MB</div>
           <div className={styles['form-subtitle']}>Maximum parallel uploads: {djsConfig.maxFiles}</div>
+          <meta name="csrf-token" content={this.props.filesMeta.csrfToken} />
           <DropzoneComponent className={styles['form-dropzone']} config={dropzoneConfig} djsConfig={djsConfig} eventHandlers={eventHandlers} />
         </div>
       </div>
@@ -62,10 +61,18 @@ export class FileCreateWidget extends Component {
   }
 }
 
+// Retrieve data from store as props
+function mapStateToProps(state) {
+  return {
+    filesMeta: getFilesMeta(state),
+  };
+}
+
 FileCreateWidget.propTypes = {
+  filesMeta: PropTypes.object,
   uploadFilesSuccessCb: PropTypes.func.isRequired,
   showAddFile: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(FileCreateWidget);
+export default connect(mapStateToProps)(injectIntl(FileCreateWidget));

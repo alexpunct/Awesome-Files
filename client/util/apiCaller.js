@@ -26,9 +26,16 @@ export function callApiBlob(endpoint, method = 'get', body) {
     );
 }
 
+const documentGetCsrfToken = () => {
+  if (typeof document === 'undefined' || !document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content')) {
+    return null;
+  }
+  return document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value;
+};
+
 export default function callApi(endpoint, method = 'get', body) {
   return fetch(`${API_URL}/${endpoint}`, {
-    headers: { 'content-type': 'application/json', 'x-auth': AUTH_TOKEN },
+    headers: { 'content-type': 'application/json', 'x-auth': AUTH_TOKEN, 'csrf-token': documentGetCsrfToken() },
     method,
     body: JSON.stringify(body),
   })

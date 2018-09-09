@@ -2,7 +2,10 @@ import Express from 'express';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import csrf from 'csurf';
 import path from 'path';
+import helmet from 'helmet';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
 // Initialize the Express App
@@ -61,12 +64,16 @@ if (process.env.NODE_ENV !== 'test') {
   });
 }
 
+const csrfProtection = csrf({ cookie: true });
+
 // Apply body Parser and server public assets and routes
 app.use(compression());
+app.use(helmet());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
+app.use(cookieParser());
 app.use(Express.static(path.resolve(__dirname, '../dist/client')));
-app.use('/api', files);
+app.use('/api', csrfProtection, files);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
