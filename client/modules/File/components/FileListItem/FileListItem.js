@@ -15,7 +15,7 @@ function FileListItem(props) {
       </h3>
       <p className={styles['file-size']}>Date: {moment(props.file.dateAdded).format('lll')}</p>
       <p className={styles['file-size']}>Size: {filesize(props.file.size)}</p>
-      <p className={styles['file-type']}>Type: {props.file.mimetype}</p>
+      <p className={styles['file-type']}>Type: {props.file.extension}</p>
       <p className={styles['files-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deleteFile" /></a></p>
       <hr className={styles.divider} />
     </div>
@@ -26,6 +26,7 @@ FileListItem.propTypes = {
   file: PropTypes.shape({
     filename: PropTypes.string.isRequired,
     mimetype: PropTypes.string.isRequired,
+    extension: PropTypes.string.isRequired,
     size: PropTypes.number.isRequired,
     path: PropTypes.string.isRequired,
     dateAdded: PropTypes.string.isRequired,

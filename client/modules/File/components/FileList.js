@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import FileListItem from './FileListItem/FileListItem';
 
 function FileList(props) {
+  // do we have any files? If not show something
   if (!props.files || props.files.length === 0) {
     return <div>No files uploaded yet...</div>;
   }

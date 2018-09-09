@@ -1,13 +1,14 @@
 import { Router } from 'express';
 import * as FileController from '../controllers/file.controller';
 import fs from 'fs';
-
 import multer from 'multer';
 
+// Storing the files in the uploads root folder
 const storage = multer.diskStorage({
   destination: './uploads/',
-  filename(req, file, cb) {
+  filename(req, file, cb) { // get the file name
     let saveName = file.originalname;
+    // in case we have a file with the same name already, add the current timestamp in front of it
     if (fs.existsSync(`./uploads/${file.originalname}`)) {
       saveName = `${Date.now()}_${saveName}`;
     }
@@ -17,7 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const router = new Router();
-
+// simple authentication to not allow access to the api from the browser. Should be replaced with proper auth
 router.use((req, res, next) => {
   if (!req.headers['x-auth']) {
     return res.sendStatus(401);
@@ -25,22 +26,22 @@ router.use((req, res, next) => {
   return next();
 });
 
-// Get all files
+// GET all Files
 router.route('/files').get(FileController.getFiles);
 
-// Get one file by cuid
+// GET one File by cuid
 router.route('/files/:cuid').get(FileController.getFile);
 
-// Downlaod individual file
+// GET one individual File as binary
 router.route('/download/:cuid').get(FileController.downloadFile);
 
-// Delete a File by cuid
+// DELETE a File by cuid
 router.route('/files/:cuid').delete(FileController.deleteFile);
 
-// Get all files meta data
+// GET All Files meta data
 router.route('/filesMeta').get(FileController.getFilesMeta);
 
-// Add a new File
+// POST a new File
 router.use(upload.single('file')).route('/files').post(FileController.addFile);
 
 export default router;

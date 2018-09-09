@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
+
+// Import Selectors
 import { getFilesMeta } from '../../FileReducer';
 
 // Import Style
@@ -9,17 +11,21 @@ import styles from './FileSearchWidget.css';
 
 export class FileSearchWidget extends Component {
 
+  // take the values of the search fields and call the parent callback
   searchFile = () => {
     const filenameRef = this.refs.filename;
     const typeRef = this.refs.type;
     this.props.searchFile(filenameRef.value, typeRef.value);
   };
 
+  // when a field is changed, trigger a search
   _handleOnChange = () => {
     this.searchFile();
   }
 
   render() {
+    // we need the filesMeta so we know which are all the available file extension
+    // so we can populate the select element
     if (!this.props.filesMeta || !this.props.filesMeta.allExtensions) {
       return <div>Loading...</div>;
     }
