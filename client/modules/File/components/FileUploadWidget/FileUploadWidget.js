@@ -26,7 +26,7 @@ export class FileCreateWidget extends Component {
       maxFilesize: 20, // MB
       parallelUploads: 10,
       createImageThumbnails: false,
-      timeout: 1000,
+      timeout: 360000,
     };
 
     const eventHandlers = {
@@ -41,14 +41,20 @@ export class FileCreateWidget extends Component {
       error: (file, error) => {
         if (!file.accepted) {
           NotificationManager.error('Error uploading', error);
-          this.dropzone.removeAllFiles(true);
         }
       },
       totaluploadprogress: (progress) => {
         // @todo add progress bar
         return progress;
       },
-      success: f => { this.props.uploadFilesSuccessCb(f); this.dropzone.removeAllFiles(true); },
+      success: f => {
+        this.props.uploadFilesSuccessCb(f);
+        NotificationManager.success('Files uploaded', null, 2000);
+      },
+      complete: () => {
+        this.dropzone.removeAllFiles(true);
+        this.props.uploadFilesComplete();
+      },
     };
 
     return (
@@ -75,8 +81,10 @@ function mapStateToProps(state) {
 FileCreateWidget.propTypes = {
   filesMeta: PropTypes.object,
   uploadFilesSuccessCb: PropTypes.func.isRequired,
+  uploadFilesComplete: PropTypes.func.isRequired,
   showAddFile: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(injectIntl(FileCreateWidget));

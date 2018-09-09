@@ -48,10 +48,12 @@ class FileListPage extends Component {
 
   uploadFilesSuccess = () => {
     this.props.dispatch(toggleUploadFileForm());
+  };
+
+  uploadFilesComplete = () => {
     this.props.dispatch(fetchFiles(this.state));
     this.props.dispatch(fetchFilesMeta(this.state));
-    NotificationManager.success('Files uploaded', null, 2000);
-  };
+  }
 
   handleSearchFile = (filename, extension) => {
     this.setState({ filename: `/${filename}/i`, extension: `${extension}` });
@@ -60,7 +62,7 @@ class FileListPage extends Component {
   render() {
     return (
       <div>
-        <FileUploadWidget uploadFilesSuccessCb={this.uploadFilesSuccess} showAddFile={this.props.showAddFile} />
+        <FileUploadWidget uploadFilesSuccessCb={this.uploadFilesSuccess} uploadFilesComplete={this.uploadFilesComplete} showAddFile={this.props.showAddFile} />
         <FileSearchWidget searchFile={this.handleSearchFile} />
         <FileList handleDeleteFile={this.handleDeleteFile} handleDownloadFile={this.handleDownloadFile} files={this.props.files} />
       </div>
