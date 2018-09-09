@@ -20,10 +20,10 @@ Awesome Files is a simple application built using [MERN Starter](https://github.
 - Stores the files meta-data in a MongoDB database
 - Uploads all files in the `/uploads` root folder
 
-## Other additions
+#### Other additions
 
 - [React Dropzone Component](https://github.com/felixrieseberg/React-Dropzone-Component) for file uploads
-- CSRF protection
+- [CSRF](https://github.com/expressjs/csurf) protection
 
 ## Dev Quickstart
 
@@ -61,6 +61,23 @@ To reset the database:
 ```sh
 docker-compose down --volumes
 ```
+
+## Code structure
+
+#### Frontend - client
+
+Inside the `client/modules` folder is most of the functionality:
+- `App` module contains the wrapper, header and footer
+- `File` module contains most of the content like the files list, upload widget and search widget
+
+#### Backend - server
+
+In the `server` folder, the code is following the MERN convention:
+- models - contain the schema for MongoDB
+- routes - contains the API routes with the upload middleware
+- controllers - here are all the methods for interacting with the Mongodb database: CRUD file meta data
+
+Also in the `server.js` file is where tha application is setup and most middlewares are added.
 
 ## License
 Awesome Files is released under the [MIT License](http://www.opensource.org/licenses/MIT).
