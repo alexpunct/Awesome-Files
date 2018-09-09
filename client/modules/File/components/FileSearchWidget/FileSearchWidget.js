@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { getFilesMeta } from '../../FileReducer';
-import _ from 'lodash';
 
 // Import Style
 import styles from './FileSearchWidget.css';

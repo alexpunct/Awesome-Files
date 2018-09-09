@@ -32,7 +32,7 @@ FileList.propTypes = {
     path: PropTypes.string.isRequired,
     dateAdded: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
-  })).isRequired,
+  })),
   handleDeleteFile: PropTypes.func.isRequired,
   handleDownloadFile: PropTypes.func.isRequired,
 };

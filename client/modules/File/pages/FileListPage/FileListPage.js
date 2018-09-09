@@ -83,7 +83,7 @@ FileListPage.propTypes = {
     size: PropTypes.number.isRequired,
     path: PropTypes.string.isRequired,
     dateAdded: PropTypes.string.isRequired,
-  })).isRequired,
+  })),
   showAddFile: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 };

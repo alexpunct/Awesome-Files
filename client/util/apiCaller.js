@@ -1,13 +1,15 @@
 import fetch from 'isomorphic-fetch';
 import Config from '../../server/config';
 
+const AUTH_TOKEN = '123456';
+
 export const API_URL = (typeof window === 'undefined' || process.env.NODE_ENV === 'test') ?
   process.env.BASE_URL || (`http://localhost:${process.env.PORT || Config.port}/api`) :
   '/api';
 
 export function callApiBlob(endpoint, method = 'get', body) {
   return fetch(`${API_URL}/${endpoint}`, {
-    headers: { responseType: 'blob', timeout: 30000 },
+    headers: { responseType: 'blob', timeout: 30000, 'x-auth': AUTH_TOKEN },
     method,
     body: JSON.stringify(body),
   })
@@ -26,7 +28,7 @@ export function callApiBlob(endpoint, method = 'get', body) {
 
 export default function callApi(endpoint, method = 'get', body) {
   return fetch(`${API_URL}/${endpoint}`, {
-    headers: { 'content-type': 'application/json' },
+    headers: { 'content-type': 'application/json', 'x-auth': AUTH_TOKEN },
     method,
     body: JSON.stringify(body),
   })

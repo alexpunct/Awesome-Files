@@ -17,6 +17,13 @@ const upload = multer({ storage });
 
 const router = new Router();
 
+router.use((req, res, next) => {
+  if (!req.headers['x-auth']) {
+    return res.sendStatus(401);
+  }
+  return next();
+});
+
 // Get all files
 router.route('/files').get(FileController.getFiles);
 
