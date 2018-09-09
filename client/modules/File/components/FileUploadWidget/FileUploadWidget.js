@@ -36,9 +36,13 @@ export class FileCreateWidget extends Component {
       },
       maxfilesexceeded: (file) => {
         NotificationManager.error(`Error uploading ${file.name}`, 'Maximum parallel files exceeded. Please try again...');
+        this.dropzone.removeAllFiles(true);
       },
       error: (file, error) => {
-        NotificationManager.error('Error uploading', error);
+        if (!file.accepted) {
+          NotificationManager.error('Error uploading', error);
+          this.dropzone.removeAllFiles(true);
+        }
       },
       totaluploadprogress: (progress) => {
         // @todo add progress bar
