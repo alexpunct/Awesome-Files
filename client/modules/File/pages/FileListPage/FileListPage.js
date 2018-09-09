@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 // Import Components
 import FileList from '../../components/FileList';
@@ -14,7 +15,8 @@ import { toggleUploadFileForm } from '../../../App/AppActions';
 // Import Selectors
 import { getShowUploadFileForm } from '../../../App/AppReducer';
 import { getFiles } from '../../FileReducer';
-import _ from 'lodash';
+
+import { NotificationManager } from 'react-notifications';
 
 class FileListPage extends Component {
   state = {
@@ -36,6 +38,7 @@ class FileListPage extends Component {
     if (confirm('Do you want to delete this file')) { // eslint-disable-line
       this.props.dispatch(deleteFileRequest(file));
       this.props.dispatch(fetchFilesMeta(this.state));
+      NotificationManager.success('File deleted', null, 2000);
     }
   };
 
@@ -47,6 +50,7 @@ class FileListPage extends Component {
     this.props.dispatch(toggleUploadFileForm());
     this.props.dispatch(fetchFiles(this.state));
     this.props.dispatch(fetchFilesMeta(this.state));
+    NotificationManager.success('Files uploaded', null, 2000);
   };
 
   handleSearchFile = (filename, extension) => {

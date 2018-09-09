@@ -14,6 +14,8 @@ import Footer from './components/Footer/Footer';
 import { toggleUploadFileForm } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
+import { NotificationContainer } from 'react-notifications';
+
 let DevTools;
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
@@ -59,6 +61,7 @@ export class App extends Component {
             intl={this.props.intl}
             toggleUploadFile={this.toggleUploadFileForm}
           />
+          <NotificationContainer className={styles['notification-container']} />
           <div className={styles.container}>
             {this.props.children}
           </div>

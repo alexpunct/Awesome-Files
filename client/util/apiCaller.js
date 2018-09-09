@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import Config from '../../server/config';
 
-const AUTH_TOKEN = '123456';
+export const AUTH_TOKEN = '123456';
 
 export const API_URL = (typeof window === 'undefined' || process.env.NODE_ENV === 'test') ?
   process.env.BASE_URL || (`http://localhost:${process.env.PORT || Config.port}/api`) :
