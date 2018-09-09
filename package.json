@@ -1,7 +1,7 @@
 {
-  "name": "@hashnode/mern-starter",
-  "version": "2.4.0",
-  "description": "Boilerplate project for building Isomorphic apps using React and Redux",
+  "name": "@alexpunct/awesome-files",
+  "version": "0.1.0",
+  "description": "Simple app to manage files, built with the MERN stack. Upload, download, search and delete files. Dockerized.",
   "scripts": {
     "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node node_modules/ava/cli.js",
     "watch:test": "npm run test -- --watch",
@@ -24,9 +24,10 @@
     "url": "https://github.com/Hashnode/mern-starter/issues"
   },
   "homepage": "https://github.com/Hashnode/mern-starter#readme",
-  "author": "Prashant Abhishek <prashant.abhishek7g@gmail.com>, Mayank Chandola <imayankchd@gmail.com>, Sandeep Panda <sandeep@hashnode.com>, Syed Fazle Rahman <fazle@hashnode.com>, Alkshendra Maurya <alkshendra@hashnode.com>",
+  "author": "Alex Bejan <contact@bejanalex.com>",
   "license": "MIT",
   "dependencies": {
+    "api-query-params": "^4.8.0",
     "babel-core": "^6.26.0",
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",

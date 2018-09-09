@@ -27,7 +27,7 @@ export class FileCreateWidget extends Component {
         // save the instance against the class so we can reference it later and reset it
         this.dropzone = dz;
       },
-      success: f => { this.props.addFiles(f); this.dropzone.removeAllFiles(true); },
+      success: f => { this.props.uploadFilesSuccessCb(f); this.dropzone.removeAllFiles(true); },
     };
 
     return (
@@ -43,7 +43,7 @@ export class FileCreateWidget extends Component {
 }
 
 FileCreateWidget.propTypes = {
-  addFiles: PropTypes.func.isRequired,
+  uploadFilesSuccessCb: PropTypes.func.isRequired,
   showAddFile: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
 };

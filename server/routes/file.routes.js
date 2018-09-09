@@ -22,10 +22,15 @@ router.route('/files').get(FileController.getFiles);
 
 // Get one file by cuid
 router.route('/files/:cuid').get(FileController.getFile);
+
+// Downlaod individual file
 router.route('/download/:cuid').get(FileController.downloadFile);
 
 // Delete a File by cuid
 router.route('/files/:cuid').delete(FileController.deleteFile);
+
+// Get all files meta data
+router.route('/filesMeta').get(FileController.getFilesMeta);
 
 // Add a new File
 router.use(upload.single('file')).route('/files').post(FileController.addFile);
